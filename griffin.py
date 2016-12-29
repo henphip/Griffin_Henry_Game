@@ -14,6 +14,11 @@ else:
     screen_x = int(screen_raw.split(',')[0])
     screen_y = int(screen_raw.split(',')[1])
 
+tagger_size = 60
+runner_size = 30
+rect1_size = 30
+rect2_size = 30
+
 rect_1_x = 10
 rect_1_y = (screen_y-30)/2
 rect_2_x = screen_x-(10+30)
@@ -49,19 +54,25 @@ while not done:
     if pressed[pygame.K_d] and rect_2_x < screen_x-30: rect_2_x += 15
     if pressed[pygame.K_a] and rect_2_x > 5: rect_2_x -= 15
 
-    if abs(rect_1_y-rect_2_y) < 15 and abs(rect_1_x-rect_2_x) < 15:
+    if abs(rect_1_y-rect_2_y) < 45 and abs(rect_1_x-rect_2_x) < 45:
         if tagger == 1:
-            player1_score += 1
-        if tagger == 2:
             player2_score += 1
+            tagger = 2
+            rect1_size = tagger_size
+            rect2_size = runner_size
+        else:
+            player1_score += 1
+            tagger = 1
+            rect2_size = tagger_size
+            rect1_size = runner_size
 
         rect_1_x = 10
         rect_1_y = (screen_y-30)/2
         rect_2_x = screen_x-(10+30)
         rect_2_y = (screen_y-30)/2
 
-    pygame.draw.rect(screen, (0, 128, 255), pygame.Rect(rect_1_x, rect_1_y, 30, 30))
-    pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(rect_2_x, rect_2_y, 30, 30))
+    pygame.draw.rect(screen, (0, 128, 255), pygame.Rect(rect_1_x, rect_1_y, rect1_size, rect1_size))
+    pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(rect_2_x, rect_2_y, rect2_size, rect2_size))
     label1 = myfont.render(("Player 1 Score: " + str(player1_score) + '      Player 2 Score: ' + str(player2_score)), 1, (0,0,0))
     screen.blit(label1, (50, 10))
 
