@@ -31,6 +31,11 @@ pygame.init()
 screen = pygame.display.set_mode((screen_x, screen_y))
 clock = pygame.time.Clock()
 myfont = pygame.font.SysFont("monospace", 50)
+countdown = datetime.datetime.now()
+time = 10
+
+def _format_deltatime(td):
+    return 10-td.seconds
 
 done = False
 while not done:
@@ -70,11 +75,23 @@ while not done:
         rect_1_y = (screen_y-30)/2
         rect_2_x = screen_x-(10+30)
         rect_2_y = (screen_y-30)/2
+        countdown = datetime.datetime.now()
+
+    if time < 0:
+        rect_1_x = 10
+        rect_1_y = (screen_y-30)/2
+        rect_2_x = screen_x-(10+30)
+        rect_2_y = (screen_y-30)/2
+        countdown = datetime.datetime.now()
+
 
     pygame.draw.rect(screen, (0, 128, 255), pygame.Rect(rect_1_x, rect_1_y, rect1_size, rect1_size))
     pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(rect_2_x, rect_2_y, rect2_size, rect2_size))
     label1 = myfont.render(("Player 1 Score: " + str(player1_score) + '      Player 2 Score: ' + str(player2_score)), 1, (0,0,0))
     screen.blit(label1, (50, 10))
+    time = _format_deltatime(datetime.datetime.now() - countdown)
+    label2 = myfont.render(str(time), 1, (0,0,0))
+    screen.blit(label2, (screen_x-50, screen_y-50))
 
     pygame.display.flip()
     clock.tick(60)
