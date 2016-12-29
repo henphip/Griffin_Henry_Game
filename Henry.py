@@ -48,7 +48,7 @@ while not done:
     if pressed[pygame.K_a] and rect_2_x > 5: rect_2_x -= 30
 
     screen.blit(player1, (rect_1_x, rect_1_y))
-    screen.blit(player2, (rect_2_x, rect_1_y))
+    screen.blit(player2, (rect_2_x, rect_2_y))
 
     pygame.display.flip()
     clock.tick(60)

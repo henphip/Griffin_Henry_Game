@@ -14,6 +14,11 @@ else:
     screen_x = int(screen_raw.split(',')[0])
     screen_y = int(screen_raw.split(',')[1])
 
+tagger_size = 70
+runner_size = 40
+rect1_size = 30
+rect2_size = 30
+
 rect_1_x = 10
 rect_1_y = (screen_y-30)/2
 rect_2_x = screen_x-(10+30)
@@ -22,12 +27,13 @@ player1_score = 0
 player2_score = 0
 tagger = 1
 
-rawp1 = pygame.image.load('apple.png')
-player1 = pygame.transform.scale(rawp1, (40, 40))
-rawp2 = pygame.image.load('windows.png')
-player2 = pygame.transform.scale(rawp2, (40, 40))
-
 pygame.init()
+
+rawp1 = pygame.image.load('apple.png')
+player1 = pygame.transform.scale(rawp1, (runner_size, runner_size))
+rawp2 = pygame.image.load('windows.png')
+player2 = pygame.transform.scale(rawp2, (tagger_size, tagger_size))
+
 screen = pygame.display.set_mode((screen_x, screen_y))
 clock = pygame.time.Clock()
 myfont = pygame.font.SysFont("monospace", 50)
@@ -54,12 +60,21 @@ while not done:
     if pressed[pygame.K_d] and rect_2_x < screen_x-30: rect_2_x += 15
     if pressed[pygame.K_a] and rect_2_x > 5: rect_2_x -= 15
 
-    if abs(rect_1_y-rect_2_y) < 15 and abs(rect_1_x-rect_2_x) < 15:
+    if abs(rect_1_y-rect_2_y) < 45 and abs(rect_1_x-rect_2_x) < 45:
         if tagger == 1:
-            player1_score += 1
-        if tagger == 2:
             player2_score += 1
-
+            tagger = 2
+            rawp1 = pygame.image.load('apple.png')
+            player1 = pygame.transform.scale(rawp1, (tagger_size, tagger_size))
+            rawp2 = pygame.image.load('windows.png')
+            player2 = pygame.transform.scale(rawp2, (runner_size, runner_size))
+        else:
+            player1_score += 1
+            tagger = 1
+            rawp1 = pygame.image.load('apple.png')
+            player1 = pygame.transform.scale(rawp1, (runner_size, runner_size))
+            rawp2 = pygame.image.load('windows.png')
+            player2 = pygame.transform.scale(rawp2, (tagger_size, tagger_size))
         rect_1_x = 10
         rect_1_y = (screen_y-30)/2
         rect_2_x = screen_x-(10+30)
