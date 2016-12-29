@@ -4,24 +4,29 @@ import pygame
 pygame.init()
 screen = pygame.display.set_mode((800, 800))
 done = False
-rect_x = 30
-rect_y = 75
+rect_x = 0
+rect_y = 0
+clock = pygame.time.Clock()
+
 
 while not done:
+    screen.fill((0, 0, 0))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
 
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-            rect_y += 50
-            rect_x += 0
-        pygame.draw.rect(screen, (0, 128, 255), pygame.Rect(rect_x, rect_y, 20, 30))
+    pressed = pygame.key.get_pressed()
 
-        pygame.draw.rect(screen, (0, 128, 255), pygame.Rect(0, 0, 30, 30))
-        pygame.draw.rect(screen, (0, 128, 255), pygame.Rect(50, 0, 30, 30))
-        pygame.draw.rect(screen, (0, 128, 255), pygame.Rect(25, 15, 30, 30))
-        pygame.draw.rect(screen, (0, 128, 255), pygame.Rect(25, 45, 30, 30))
-        pygame.draw.rect(screen, (0, 128, 255), pygame.Rect(25, 75, 30, 30))
+    if pressed[pygame.K_UP]: rect_y -= 30
+    if pressed[pygame.K_DOWN]: rect_y += 30
+    if pressed[pygame.K_RIGHT]: rect_x += 30
+    if pressed[pygame.K_LEFT]: rect_x -= 30
 
+    pygame.draw.rect(screen, (0, 128, 255), pygame.Rect(rect_x, rect_y, 30, 30))
 
-        pygame.display.flip()
+    pomagranite = pygame.image.load('botanical-details-pomegranate-2_3.jpg')
+    imagerect = pomagranite.get_rect()
+    screen.blit(pomagranite, imagerect)
+
+    pygame.display.flip()
+    clock.tick(60)
