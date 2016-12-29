@@ -29,22 +29,21 @@ while not done:
 
     pressed = pygame.key.get_pressed()
 
-    if pressed[pygame.K_DELETE]:
+    if pressed[pygame.K_BACKSPACE]:
         done = True
 
-    if pressed[pygame.K_UP] and rect_1_y > 0: rect_1_y -= 30
+    if pressed[pygame.K_UP] and rect_1_y > 5: rect_1_y -= 30
     if pressed[pygame.K_DOWN] and rect_1_y < screen_y-30: rect_1_y += 30
     if pressed[pygame.K_RIGHT] and rect_1_x < screen_x-30: rect_1_x += 30
     if pressed[pygame.K_LEFT] and rect_1_x > 5: rect_1_x -= 30
 
-    if pressed[pygame.K_w] and rect_2_y > 0: rect_2_y -= 30
+    if pressed[pygame.K_w] and rect_2_y > 5: rect_2_y -= 30
     if pressed[pygame.K_s] and rect_2_y < screen_y-30: rect_2_y += 30
     if pressed[pygame.K_d] and rect_2_x < screen_x-30: rect_2_x += 30
     if pressed[pygame.K_a] and rect_2_x > 5: rect_2_x -= 30
 
     pygame.draw.rect(screen, (0, 128, 255), pygame.Rect(rect_1_x, rect_1_y, 30, 30))
     pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(rect_2_x, rect_2_y, 30, 30))
-
 
     pygame.display.flip()
     clock.tick(60)
