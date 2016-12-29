@@ -38,6 +38,11 @@ screen = pygame.display.set_mode((screen_x, screen_y))
 clock = pygame.time.Clock()
 myfont = pygame.font.SysFont("monospace", 50)
 
+rawp1even = pygame.image.load('apple.png')
+player1even = pygame.transform.scale(rawp1even, (30, 30))
+rawp2even = pygame.image.load('windows.png')
+player2even = pygame.transform.scale(rawp2even, (30, 30))
+
 done = False
 while not done:
     screen.fill((255, 255, 255))
@@ -80,9 +85,11 @@ while not done:
         rect_2_x = screen_x-(10+30)
         rect_2_y = (screen_y-30)/2
 
+    screen.blit(player1even, (158, 9))
+    screen.blit(player2even, (500, 10))
     screen.blit(player1, (rect_1_x, rect_1_y))
     screen.blit(player2, (rect_2_x, rect_2_y))
-    label1 = myfont.render(("Player 1 Score: " + str(player1_score) + '      Player 2 Score: ' + str(player2_score)), 1, (0,0,0))
+    label1 = myfont.render(("Player     Score: " + str(player1_score) + '      Player     Score: ' + str(player2_score)), 1, (0,0,0))
     screen.blit(label1, (50, 10))
 
     pygame.display.flip()
