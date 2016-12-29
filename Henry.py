@@ -24,9 +24,11 @@ while not done:
 
     pygame.draw.rect(screen, (0, 128, 255), pygame.Rect(rect_x, rect_y, 30, 30))
 
-    pomagranite = pygame.image.load('botanical-details-pomegranate-2_3.jpg')
-    imagerect = pomagranite.get_rect()
-    screen.blit(pomagranite, imagerect)
+    rawpom = pygame.image.load('botanical-details-pomegranate-2_3.jpg')
+
+    pomegranate = pygame.transform.scale(rawpom, (50, 50))
+
+    screen.blit(pomegranate, (100, 100))
 
     pygame.display.flip()
     clock.tick(60)
